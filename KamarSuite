@@ -1,0 +1,22 @@
+public class KamarSuite extends Kamar {
+
+    // field tambahan khusus kamar suite
+    private String fasilitasTambahan;
+
+    // === CONSTRUCTOR ===
+    public KamarSuite(String nomorKamar, double hargaPerMalam, String fasilitasTambahan) {
+        super(nomorKamar, hargaPerMalam); // panggil constructor parent
+        this.fasilitasTambahan = fasilitasTambahan;
+    }
+
+    // === GETTER ===
+    public String getFasilitasTambahan() { return fasilitasTambahan; }
+
+    // === OVERRIDE displayInfo (Polymorphism) ===
+    @Override
+    public void displayInfo() {
+        System.out.println("[SUITE]   No: " + getNomorKamar()
+            + " | Fasilitas: " + fasilitasTambahan
+            + " | Harga: Rp" + getHargaPerMalam() + "/malam");
+    }
+}
