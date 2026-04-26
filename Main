@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        // === IDENTITAS MAHASISWA ===
+        System.out.println("================================");
+        System.out.println("Nama  : [Nama kamu]");
+        System.out.println("NIM   : [NIM kamu]");
+        System.out.println("Kelas : [Kelas kamu]");
+        System.out.println("================================");
+
+        // buat object hotel
+        // kamar sudah otomatis tersedia di dalam constructor Hotel
+        Hotel hotel = new Hotel("Hotel Bali Indah");
+        Scanner sc  = new Scanner(System.in);
+
+        // === INPUT JUMLAH TAMU ===
+        System.out.print("\nMasukkan jumlah tamu: ");
+        int jumlahTamu = sc.nextInt();
+        sc.nextLine(); // buang sisa enter
+
+        for (int i = 1; i <= jumlahTamu; i++) {
+            System.out.println("\n========== TAMU KE-" + i + " ==========");
+
+            System.out.print("Nama  : ");
+            String nama = sc.nextLine();
+
+            System.out.print("No KTP: ");
+            String ktp = sc.nextLine();
+
+            // buat object tamu baru
+            Tamu tamu = new Tamu(nama, ktp);
+
+            // === TAMU PILIH KAMAR ===
+            String lagi = "y";
+            while (lagi.equalsIgnoreCase("y")) {
+
+                // tampilkan daftar kamar yang tersedia
+                hotel.tampilSemuaKamar();
+
+                System.out.print("\nMasukkan nomor kamar yang dipilih: ");
+                String nomorKamar = sc.nextLine();
+
+                // cari kamar by nomor kamar — ini bagian TANTANGAN!
+                Kamar kamar = hotel.cariKamar(nomorKamar);
+
+                if (kamar != null) {
+                    // kamar ditemukan, langsung pesan
+                    tamu.pesanKamar(kamar);
+                    System.out.println("Berhasil memesan kamar " + kamar.getNomorKamar() + "!");
+                } else {
+                    // nomor kamar tidak ada di daftar
+                    System.out.println("Kamar tidak ditemukan! Coba nomor lain.");
+                }
+
+                System.out.print("Pesan kamar lagi? (y/n): ");
+                lagi = sc.nextLine();
+            }
+
+            // simpan tamu ke hotel setelah selesai pilih kamar
+            hotel.tambahTamu(tamu);
+            System.out.println("Data tamu " + nama + " berhasil disimpan!");
+        }
+
+        // === TAMPILKAN SEMUA DATA ===
+        hotel.tampilSemuaKamar();
+        hotel.tampilSemuaTamu();
+
+        sc.close(); // tutup scanner
+    }
+}
