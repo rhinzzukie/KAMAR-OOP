@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+
+public class Tamu {
+
+    // === FIELD (Encapsulation) ===
+    private String nama;
+    private String noKTP;
+    private ArrayList<Kamar> kamarDipesan; // list kamar yang dipesan tamu ini
+
+    // === CONSTRUCTOR ===
+    public Tamu(String nama, String noKTP) {
+        this.nama         = nama;
+        this.noKTP        = noKTP;
+        this.kamarDipesan = new ArrayList<>(); // siapkan keranjang kosong
+    }
+
+    // === GETTER ===
+    public String getNama()  { return nama; }
+    public String getNoKTP() { return noKTP; }
+
+    // === METHOD pesanKamar ===
+    // masukkan kamar yang dipilih ke dalam list
+    public void pesanKamar(Kamar kamar) {
+        kamarDipesan.add(kamar);
+    }
+
+    // === METHOD displayInfo ===
+    // tampilkan data tamu + semua kamar yang dipesan
+    public void displayInfo() {
+        System.out.println("\nNama  : " + nama);
+        System.out.println("No KTP: " + noKTP);
+        System.out.println("Kamar yang dipesan:");
+        if (kamarDipesan.isEmpty()) {
+            // isEmpty() = cek apakah list kosong
+            System.out.println("  (Belum ada kamar yang dipesan)");
+        } else {
+            for (Kamar k : kamarDipesan) {
+                System.out.print("  -> ");
+                k.displayInfo(); // Polymorphism!
+            }
+        }
+    }
+}
