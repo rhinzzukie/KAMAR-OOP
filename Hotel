@@ -1,0 +1,63 @@
+import java.util.ArrayList;
+
+public class Hotel {
+
+    // === FIELD ===
+    private String namaHotel;
+    private ArrayList<Kamar> daftarKamar;
+    private ArrayList<Tamu> daftarTamu;
+
+    // === CONSTRUCTOR ===
+    // kamar sudah disediakan otomatis, tamu tinggal pilih
+    public Hotel(String namaHotel) {
+        this.namaHotel   = namaHotel;
+        this.daftarKamar = new ArrayList<>();
+        this.daftarTamu  = new ArrayList<>();
+
+        // data kamar hardcode — seperti kode dosen
+        daftarKamar.add(new KamarStandar("101", 350000, "Single"));
+        daftarKamar.add(new KamarStandar("102", 350000, "Double"));
+        daftarKamar.add(new KamarStandar("103", 400000, "Queen"));
+        daftarKamar.add(new KamarSuite  ("201", 900000,  "Jacuzzi + Balkon"));
+        daftarKamar.add(new KamarSuite  ("202", 1200000, "Private Pool + Butler"));
+    }
+
+    // === METHOD tambahTamu ===
+    public void tambahTamu(Tamu tamu) {
+        daftarTamu.add(tamu);
+    }
+
+    // === METHOD cariKamar (TANTANGAN!) ===
+    // cari kamar berdasarkan nomor kamar
+    // return Kamar = kalau ketemu
+    // return null  = kalau tidak ketemu
+    public Kamar cariKamar(String nomorKamar) {
+        for (Kamar k : daftarKamar) {
+            if (k.getNomorKamar().equals(nomorKamar)) {
+                return k; // ketemu!
+            }
+        }
+        return null; // tidak ketemu
+    }
+
+    // === METHOD tampilSemuaKamar ===
+    public void tampilSemuaKamar() {
+        System.out.println("\n=== DAFTAR KAMAR " + namaHotel + " ===");
+        for (Kamar k : daftarKamar) {
+            k.displayInfo(); // Polymorphism!
+        }
+    }
+
+    // === METHOD tampilSemuaTamu ===
+    public void tampilSemuaTamu() {
+        System.out.println("\n=== DATA SELURUH TAMU ===");
+        if (daftarTamu.isEmpty()) {
+            System.out.println("Belum ada tamu.");
+        } else {
+            for (Tamu t : daftarTamu) {
+                t.displayInfo();
+                System.out.println("-------------------------");
+            }
+        }
+    }
+}
