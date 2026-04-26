@@ -1,0 +1,20 @@
+public abstract class Kamar {
+
+    // === FIELD (Encapsulation) ===
+    private String nomorKamar;
+    private double hargaPerMalam;
+
+    // === CONSTRUCTOR ===
+    public Kamar(String nomorKamar, double hargaPerMalam) {
+        this.nomorKamar   = nomorKamar;
+        this.hargaPerMalam = hargaPerMalam;
+    }
+
+    // === GETTER ===
+    public String getNomorKamar()    { return nomorKamar; }
+    public double getHargaPerMalam() { return hargaPerMalam; }
+
+    // === ABSTRACT METHOD (Abstraction) ===
+    // wajib diisi oleh subclass
+    public abstract void displayInfo();
+}
